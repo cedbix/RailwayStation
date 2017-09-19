@@ -12,10 +12,10 @@ namespace RailwayStation
 
         public GraphControl() : base()
         {
-            graph = new Graph<MyPoint>();
-            park1 = new Graph<MyPoint>("Park 1");
-            park2 = new Graph<MyPoint>("Park 2");
-            park3 = new Graph<MyPoint>("Park 3");
+            graph = new Graph<Point>();
+            park1 = new Graph<Point>("Park 1");
+            park2 = new Graph<Point>("Park 2");
+            park3 = new Graph<Point>("Park 3");
             activeColor = Brushes.LightGreen;
 
             if (activePark == null)
@@ -33,33 +33,33 @@ namespace RailwayStation
         protected void initGraph()
         {
             // Path 1
-            Node<MyPoint> n0_50 = new Node<MyPoint>(new MyPoint(0, 50));
-            Node<MyPoint> n20_30 = new Node<MyPoint>(new MyPoint(20, 30));
-            Node<MyPoint> n40_30 = new Node<MyPoint>(new MyPoint(40, 30));
-            Node<MyPoint> n50_40 = new Node<MyPoint>(new MyPoint(50, 40));
-            Node<MyPoint> n60_50 = new Node<MyPoint>(new MyPoint(60, 50));
-            Node<MyPoint> n70_60 = new Node<MyPoint>(new MyPoint(70, 60));
-            Node<MyPoint> n80_70 = new Node<MyPoint>(new MyPoint(80, 70));
-            Node<MyPoint> n90_80 = new Node<MyPoint>(new MyPoint(90, 80));
-            Node<MyPoint> n100_90 = new Node<MyPoint>(new MyPoint(100, 90));
-            Node<MyPoint> n150_140 = new Node<MyPoint>(new MyPoint(150, 140));
-            Node<MyPoint> n250_90 = new Node<MyPoint>(new MyPoint(250, 90));
-            Node<MyPoint> n260_100 = new Node<MyPoint>(new MyPoint(260, 100));
-            Node<MyPoint> n410_30 = new Node<MyPoint>(new MyPoint(410, 30));
-            Node<MyPoint> n410_50 = new Node<MyPoint>(new MyPoint(410, 50));
-            Node<MyPoint> n410_70 = new Node<MyPoint>(new MyPoint(410, 70));
-            Node<MyPoint> n420_40 = new Node<MyPoint>(new MyPoint(420, 40));
-            Node<MyPoint> n420_60 = new Node<MyPoint>(new MyPoint(420, 60));
-            Node<MyPoint> n420_80 = new Node<MyPoint>(new MyPoint(420, 80));
-            Node<MyPoint> n420_100 = new Node<MyPoint>(new MyPoint(420, 100));
-            Node<MyPoint> n430_90 = new Node<MyPoint>(new MyPoint(430, 90));
-            Node<MyPoint> n440_40 = new Node<MyPoint>(new MyPoint(440, 40));
-            Node<MyPoint> n440_80 = new Node<MyPoint>(new MyPoint(440, 80));
-            Node<MyPoint> n460_60 = new Node<MyPoint>(new MyPoint(460, 60));
-            Node<MyPoint> n470_60 = new Node<MyPoint>(new MyPoint(470, 60));
-            Node<MyPoint> n490_80 = new Node<MyPoint>(new MyPoint(490, 80));
-            Node<MyPoint> n500_80 = new Node<MyPoint>(new MyPoint(500, 80));
-            Node<MyPoint> n90_10 = new Node<MyPoint>(new MyPoint(90, 10));
+            Node<Point> n0_50 = new Node<Point>(new Point(0, 50));
+            Node<Point> n20_30 = new Node<Point>(new Point(20, 30));
+            Node<Point> n40_30 = new Node<Point>(new Point(40, 30));
+            Node<Point> n50_40 = new Node<Point>(new Point(50, 40));
+            Node<Point> n60_50 = new Node<Point>(new Point(60, 50));
+            Node<Point> n70_60 = new Node<Point>(new Point(70, 60));
+            Node<Point> n80_70 = new Node<Point>(new Point(80, 70));
+            Node<Point> n90_80 = new Node<Point>(new Point(90, 80));
+            Node<Point> n100_90 = new Node<Point>(new Point(100, 90));
+            Node<Point> n150_140 = new Node<Point>(new Point(150, 140));
+            Node<Point> n250_90 = new Node<Point>(new Point(250, 90));
+            Node<Point> n260_100 = new Node<Point>(new Point(260, 100));
+            Node<Point> n410_30 = new Node<Point>(new Point(410, 30));
+            Node<Point> n410_50 = new Node<Point>(new Point(410, 50));
+            Node<Point> n410_70 = new Node<Point>(new Point(410, 70));
+            Node<Point> n420_40 = new Node<Point>(new Point(420, 40));
+            Node<Point> n420_60 = new Node<Point>(new Point(420, 60));
+            Node<Point> n420_80 = new Node<Point>(new Point(420, 80));
+            Node<Point> n420_100 = new Node<Point>(new Point(420, 100));
+            Node<Point> n430_90 = new Node<Point>(new Point(430, 90));
+            Node<Point> n440_40 = new Node<Point>(new Point(440, 40));
+            Node<Point> n440_80 = new Node<Point>(new Point(440, 80));
+            Node<Point> n460_60 = new Node<Point>(new Point(460, 60));
+            Node<Point> n470_60 = new Node<Point>(new Point(470, 60));
+            Node<Point> n490_80 = new Node<Point>(new Point(490, 80));
+            Node<Point> n500_80 = new Node<Point>(new Point(500, 80));
+            Node<Point> n90_10 = new Node<Point>(new Point(90, 10));
 
             graph.AddNode(n0_50);
             graph.AddNode(n20_30);
@@ -122,9 +122,9 @@ namespace RailwayStation
             graph.AddDirectedEdge(n490_80, n500_80, 1);
 
             // Path 2
-            Node<MyPoint> n0_30 = new Node<MyPoint>(new MyPoint(0, 30));
-            Node<MyPoint> n15_20 = new Node<MyPoint>(new MyPoint(15, 20));
-            Node<MyPoint> n20_0 = new Node<MyPoint>(new MyPoint(20, 0));
+            Node<Point> n0_30 = new Node<Point>(new Point(0, 30));
+            Node<Point> n15_20 = new Node<Point>(new Point(15, 20));
+            Node<Point> n20_0 = new Node<Point>(new Point(20, 0));
             graph.AddNode(n0_30);
             graph.AddNode(n15_20);
             graph.AddNode(n20_0);
@@ -132,9 +132,9 @@ namespace RailwayStation
             graph.AddDirectedEdge(n15_20, n20_0, 1);
 
             // Path 3
-            Node<MyPoint> n0_110 = new Node<MyPoint>(new MyPoint(0, 110));
-            Node<MyPoint> n110_110 = new Node<MyPoint>(new MyPoint(110, 110));
-            Node<MyPoint> n140_140 = new Node<MyPoint>(new MyPoint(140, 140));
+            Node<Point> n0_110 = new Node<Point>(new Point(0, 110));
+            Node<Point> n110_110 = new Node<Point>(new Point(110, 110));
+            Node<Point> n140_140 = new Node<Point>(new Point(140, 140));
             graph.AddNode(n0_110);
             graph.AddNode(n110_110);
             graph.AddNode(n140_140);
@@ -198,9 +198,9 @@ namespace RailwayStation
 
         private void drawGraph(DrawingContext drawingContext)
         {
-            foreach (Node<MyPoint> node in graph.Nodes)
+            foreach (Node<Point> node in graph.Nodes)
             {
-                foreach (Node<MyPoint> neighbor in node.Neighbors)
+                foreach (Node<Point> neighbor in node.Neighbors)
                     drawingContext.DrawLine(new Pen(Brushes.Gray, 1), new Point(node.Value.X, node.Value.Y), new Point(neighbor.Value.X, neighbor.Value.Y));
 
                 if (node.Neighbors.Count > 2)
@@ -213,7 +213,7 @@ namespace RailwayStation
             PathFigure path = new PathFigure();
             bool pathStarted = false;
            
-            foreach (Node<MyPoint> node in activePark.Nodes)
+            foreach (Node<Point> node in activePark.Nodes)
             {
                 if (!pathStarted)
                 {
@@ -247,11 +247,11 @@ namespace RailwayStation
             drawingContext.DrawText(formattedText, center);
         }
 
-        private Point findGraphCenter(Graph<MyPoint> graph)
+        private Point findGraphCenter(Graph<Point> graph)
         {
-            int minX = 0, maxX = 0, minY = 0, maxY = 0;
+            double minX = 0, maxX = 0, minY = 0, maxY = 0;
             bool pathStarted = false;
-            foreach (Node<MyPoint> node in activePark.Nodes)
+            foreach (Node<Point> node in activePark.Nodes)
             {
                 if (!pathStarted)
                 {
@@ -275,21 +275,21 @@ namespace RailwayStation
                 }
                 
             }
-            int x = Math.Abs((maxX + minX) / 2);
-            int y = Math.Abs((maxY + minY) / 2);
+            double x = Math.Abs((maxX + minX) / 2);
+            double y = Math.Abs((maxY + minY) / 2);
             return new Point(x, y);
         }
 
         // All nodes and edges
-        private Graph<MyPoint> graph;
+        private Graph<Point> graph;
 
         // Parks for painting
-        private Graph<MyPoint> park1;
-        private Graph<MyPoint> park2;
-        private Graph<MyPoint> park3;
+        private Graph<Point> park1;
+        private Graph<Point> park2;
+        private Graph<Point> park3;
 
         // Link to active park
-        private Graph<MyPoint> activePark;
+        private Graph<Point> activePark;
 
         // Color to paint active park
         private SolidColorBrush activeColor;
