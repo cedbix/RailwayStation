@@ -1,15 +1,17 @@
 ﻿using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using System;
-using System.Windows.Controls;
 using System.Globalization;
 
 namespace RailwayStation
 {
+    /// <summary>
+    /// Class implements:
+    /// 1. Graphs initialisation
+    /// 2. Drawing and UI updating
+    /// </summary>
     class GraphControl : FrameworkElement
     {
-
         public GraphControl() : base()
         {
             graph = new Graph<Point>();

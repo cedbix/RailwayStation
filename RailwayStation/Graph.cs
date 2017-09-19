@@ -1,12 +1,9 @@
-﻿using System;
-//using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-//using System.Threading.Tasks;
-
+﻿
 namespace RailwayStation
 {
+    /// <summary>
+    /// Class implements graph to store railway switches as nodes and railway routes as edges
+    /// </summary>
     class Graph<T>
     {
         private NodeList<T> nodeSet;
