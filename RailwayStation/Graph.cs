@@ -10,10 +10,18 @@ namespace RailwayStation
     class Graph<T>// : IEnumerable<T>
     {
         private NodeList<T> nodeSet;
+        private string name;
 
-        public Graph() : this(null) { }
-        public Graph(NodeList<T> nodeSet)
+        public Graph() : this(null, null) { }
+        public Graph(string name) : this(name, null) { }
+        public Graph(NodeList<T> nodeSet) : this(null, nodeSet) { }
+        public Graph(string name, NodeList<T> nodeSet)
         {
+            if (name == null)
+                this.name = "";
+            else
+                this.name = name;
+
             if (nodeSet == null)
                 this.nodeSet = new NodeList<T>();
             else
@@ -87,6 +95,18 @@ namespace RailwayStation
         public void Sort()
         {
             nodeSet.OrderBy(node => node.Value);
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
         }
 
 

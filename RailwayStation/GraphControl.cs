@@ -3,6 +3,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System;
 using System.Windows.Controls;
+using System.Globalization;
 
 namespace RailwayStation
 {
@@ -39,51 +40,19 @@ namespace RailwayStation
         {
             initGraph();
 
-            // Draw park
-            PathFigure path = new PathFigure();
-            bool pathStarted = false;
-            foreach (GraphNode<MyPoint> node in activePark.Nodes)
-            {
-                if (!pathStarted)
-                {
-                    path.StartPoint = new Point(node.Value.X, node.Value.Y);
-                    path.IsClosed = true;
-                    pathStarted = true;
-                }
-                else
-                {
-                    LineSegment segment = new LineSegment();
-                    segment.Point = new Point(node.Value.X, node.Value.Y);
-                    path.Segments.Add(segment);
-                }
-            }
-            PathGeometry geometry = new PathGeometry();
-            geometry.Figures.Add(path);
-            drawingContext.DrawGeometry(Brushes.LightGreen, new Pen(Brushes.Transparent, 1), geometry);
-
-            // Draw graph
-            foreach (GraphNode<MyPoint> node in graph.Nodes)
-            {
-                foreach (GraphNode<MyPoint> neighbor in node.Neighbors)
-                    drawingContext.DrawLine(new Pen(Brushes.Gray, 1), new Point(node.Value.X, node.Value.Y), new Point(neighbor.Value.X, neighbor.Value.Y));
-
-                if (node.Neighbors.Count > 2)
-                    drawingContext.DrawEllipse(Brushes.Red, new Pen(Brushes.DarkSlateGray, 1), new Point(node.Value.X, node.Value.Y), 2, 2);
-            }
+            drawPark(drawingContext);
+            drawGraph(drawingContext);
         }
 
         protected void initGraph()
         {
-   
-
             graph = new Graph<MyPoint>();
-            park1 = new Graph<MyPoint>();
-            park2 = new Graph<MyPoint>();
-            park3 = new Graph<MyPoint>();
+            park1 = new Graph<MyPoint>("Park 1");
+            park2 = new Graph<MyPoint>("Park 2");
+            park3 = new Graph<MyPoint>("Park 3");
 
             if (activePark == null)
                 activePark = park1;
-
 
             // Path 1
             GraphNode<MyPoint> n0_50 = new GraphNode<MyPoint>(new MyPoint(0, 50));
@@ -114,8 +83,6 @@ namespace RailwayStation
             GraphNode<MyPoint> n500_80 = new GraphNode<MyPoint>(new MyPoint(500, 80));
             GraphNode<MyPoint> n90_10 = new GraphNode<MyPoint>(new MyPoint(90, 10));
 
-            
-            
             graph.AddNode(n0_50);
             graph.AddNode(n20_30);
             graph.AddNode(n40_30);
@@ -227,6 +194,89 @@ namespace RailwayStation
             park3.AddNode(n440_40);
             park3.AddNode(n420_40);
             park3.AddNode(n410_30);
+        }
+
+        private void drawGraph(DrawingContext drawingContext)
+        {
+            foreach (GraphNode<MyPoint> node in graph.Nodes)
+            {
+                foreach (GraphNode<MyPoint> neighbor in node.Neighbors)
+                    drawingContext.DrawLine(new Pen(Brushes.Gray, 1), new Point(node.Value.X, node.Value.Y), new Point(neighbor.Value.X, neighbor.Value.Y));
+
+                if (node.Neighbors.Count > 2)
+                    drawingContext.DrawEllipse(Brushes.Red, new Pen(Brushes.DarkSlateGray, 1), new Point(node.Value.X, node.Value.Y), 2, 2);
+            }
+        }
+
+        private void drawPark(DrawingContext drawingContext)
+        {
+            // Draw park
+            PathFigure path = new PathFigure();
+            bool pathStarted = false;
+           
+            foreach (GraphNode<MyPoint> node in activePark.Nodes)
+            {
+                if (!pathStarted)
+                {
+                    path.StartPoint = new Point(node.Value.X, node.Value.Y);
+                    path.IsClosed = true;
+                    pathStarted = true;
+                }
+                else
+                {
+                    LineSegment segment = new LineSegment();
+                    segment.Point = new Point(node.Value.X, node.Value.Y);
+                    path.Segments.Add(segment);
+                }
+            }
+            PathGeometry geometry = new PathGeometry();
+            geometry.Figures.Add(path);
+            drawingContext.DrawGeometry(Brushes.LightGreen, new Pen(Brushes.Transparent, 1), geometry);
+            Point center = findGraphCenter(activePark);
+            center.X = center.X - 10;
+            center.Y = center.Y - 10;
+            FormattedText formattedText = new FormattedText(
+               activePark.Name,
+               CultureInfo.GetCultureInfo("en-us"),
+               FlowDirection.LeftToRight,
+               new Typeface("Verdana"),
+               13,
+               Brushes.Black);
+            drawingContext.DrawText(formattedText, center);
+
+        }
+
+        private Point findGraphCenter(Graph<MyPoint> graph)
+        {
+            int minX = 0, maxX = 0, minY = 0, maxY = 0;
+            bool pathStarted = false;
+            foreach (GraphNode<MyPoint> node in activePark.Nodes)
+            {
+                if (!pathStarted)
+                {
+                    minX = node.Value.X;
+                    minY = node.Value.Y;
+                    maxX = node.Value.X;
+                    maxY = node.Value.Y;
+                    pathStarted = true;
+                }
+                else
+                {
+                    if (node.Value.X < minX)
+                        minX = node.Value.X;
+                    else if (node.Value.X > maxX)
+                        maxX = node.Value.X;
+
+                    if (node.Value.Y < minY)
+                        minY = node.Value.Y;
+                    else if (node.Value.Y > maxY)
+                        maxY = node.Value.Y;
+                }
+                
+            }
+            int x = Math.Abs((maxX + minX) / 2);
+            int y = Math.Abs((maxY + minY) / 2);
+            return new Point(x, y);
         }
 
     }

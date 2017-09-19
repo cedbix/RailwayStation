@@ -10,11 +10,11 @@
 
         <ComboBox
             HorizontalAlignment="Left"
-            Margin="10,10,0,0"
+            Margin="0,0,0,0"
             VerticalAlignment="Top"
-            Width="120"
-            Loaded="ComboBox_Loaded"
-            SelectionChanged="ComboBox_SelectionChanged"/>
+            Width="70"
+            Loaded="Park_ComboBox_Loaded"
+            SelectionChanged="Park_SelectionChanged"/>
 
         <local:GraphControl x:Name="GraphControl"/>
     </Grid>

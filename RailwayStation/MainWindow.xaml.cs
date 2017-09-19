@@ -25,7 +25,7 @@ namespace RailwayStation
             InitializeComponent();
         }
 
-        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        private void Park_ComboBox_Loaded(object sender, RoutedEventArgs e)
         {
             List<string> data = new List<string>();
             data.Add("Park 1");
@@ -36,7 +36,7 @@ namespace RailwayStation
             comboBox.SelectedIndex = 0;
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Park_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBox = sender as ComboBox;
             string value = comboBox.SelectedItem as string;
