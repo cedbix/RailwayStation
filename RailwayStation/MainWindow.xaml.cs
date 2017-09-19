@@ -44,5 +44,24 @@ namespace RailwayStation
             GraphControl gc = (GraphControl)this.FindName("GraphControl");
             gc.ChangePark(value);
         }
+
+        private void Color_ComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> data = new List<string>();
+            data.Add("Green");
+            data.Add("Blue");
+            data.Add("Orange");
+            var comboBox = sender as ComboBox;
+            comboBox.ItemsSource = data;
+            comboBox.SelectedIndex = 0;
+        }
+
+        private void Color_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            string value = comboBox.SelectedItem as string;
+            GraphControl gc = (GraphControl)this.FindName("GraphControl");
+            gc.ChangeColor(value);
+        }
     }
 }

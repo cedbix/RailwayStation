@@ -10,11 +10,18 @@ namespace RailwayStation
     class GraphControl : FrameworkElement
     {
 
+        public GraphControl() : base()
+        {
+            initGraph();
+            activeColor = Brushes.LightGreen;
+        }
+
         private Graph<MyPoint> graph;
         private Graph<MyPoint> activePark;
         private Graph<MyPoint> park1;
         private Graph<MyPoint> park2;
         private Graph<MyPoint> park3;
+        private SolidColorBrush activeColor;
 
         public void ChangePark(string park)
         {
@@ -24,6 +31,17 @@ namespace RailwayStation
                 activePark = park2;
             else if (park.Equals("Park 3"))
                 activePark = park3;
+            this.InvalidateVisual();
+        }
+
+        public void ChangeColor(string park)
+        {
+            if (park.Equals("Green"))
+                activeColor = Brushes.LightGreen;
+            else if (park.Equals("Blue"))
+                activeColor = Brushes.LightSkyBlue;
+            else if (park.Equals("Orange"))
+                activeColor = Brushes.Orange;
             this.InvalidateVisual();
         }
 
@@ -38,7 +56,7 @@ namespace RailwayStation
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            initGraph();
+            //initGraph();
 
             drawPark(drawingContext);
             drawGraph(drawingContext);
@@ -231,7 +249,7 @@ namespace RailwayStation
             }
             PathGeometry geometry = new PathGeometry();
             geometry.Figures.Add(path);
-            drawingContext.DrawGeometry(Brushes.LightGreen, new Pen(Brushes.Transparent, 1), geometry);
+            drawingContext.DrawGeometry(activeColor, new Pen(Brushes.Transparent, 1), geometry);
             Point center = findGraphCenter(activePark);
             center.X = center.X - 10;
             center.Y = center.Y - 10;

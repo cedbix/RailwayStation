@@ -16,6 +16,14 @@
             Loaded="Park_ComboBox_Loaded"
             SelectionChanged="Park_SelectionChanged"/>
 
+        <ComboBox
+            HorizontalAlignment="Left"
+            Margin="70,0,0,0"
+            VerticalAlignment="Top"
+            Width="70"
+            Loaded="Color_ComboBox_Loaded"
+            SelectionChanged="Color_SelectionChanged"/>
+
         <local:GraphControl x:Name="GraphControl"/>
     </Grid>
 </Window>
