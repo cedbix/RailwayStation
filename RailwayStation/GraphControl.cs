@@ -27,10 +27,33 @@ namespace RailwayStation
         protected override void OnRender(DrawingContext drawingContext)
         {
             drawPark(drawingContext);
+            drawParkName(drawingContext);
             drawGraph(drawingContext);
         }
 
-        protected void initGraph()
+        public void ChangePark(string park)
+        {
+            if (park.Equals("Park 1"))
+                activePark = park1;
+            else if (park.Equals("Park 2"))
+                activePark = park2;
+            else if (park.Equals("Park 3"))
+                activePark = park3;
+            this.InvalidateVisual();
+        }
+
+        public void ChangeColor(string park)
+        {
+            if (park.Equals("Green"))
+                activeColor = Brushes.LightGreen;
+            else if (park.Equals("Blue"))
+                activeColor = Brushes.LightSkyBlue;
+            else if (park.Equals("Orange"))
+                activeColor = Brushes.Orange;
+            this.InvalidateVisual();
+        }
+
+        private void initGraph()
         {
             // Path 1
             Node<Point> n0_50 = new Node<Point>(new Point(0, 50));
@@ -174,28 +197,6 @@ namespace RailwayStation
             park3.AddNode(n410_30);
         }
 
-        public void ChangePark(string park)
-        {
-            if (park.Equals("Park 1"))
-                activePark = park1;
-            else if (park.Equals("Park 2"))
-                activePark = park2;
-            else if (park.Equals("Park 3"))
-                activePark = park3;
-            this.InvalidateVisual();
-        }
-
-        public void ChangeColor(string park)
-        {
-            if (park.Equals("Green"))
-                activeColor = Brushes.LightGreen;
-            else if (park.Equals("Blue"))
-                activeColor = Brushes.LightSkyBlue;
-            else if (park.Equals("Orange"))
-                activeColor = Brushes.Orange;
-            this.InvalidateVisual();
-        }
-
         private void drawGraph(DrawingContext drawingContext)
         {
             foreach (Node<Point> node in graph.Nodes)
@@ -232,8 +233,10 @@ namespace RailwayStation
             PathGeometry geometry = new PathGeometry();
             geometry.Figures.Add(path);
             drawingContext.DrawGeometry(activeColor, new Pen(Brushes.Transparent, 1), geometry);
+        }
 
-            // Draw park name
+        private void drawParkName(DrawingContext drawingContext)
+        {
             Point center = findGraphCenter(activePark);
             center.X = center.X - 10;
             center.Y = center.Y - 10;
