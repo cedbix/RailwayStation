@@ -24,5 +24,25 @@ namespace RailwayStation
         {
             InitializeComponent();
         }
+
+        private void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<string> data = new List<string>();
+            data.Add("Park 1");
+            data.Add("Park 2");
+            data.Add("Park 3");
+            var comboBox = sender as ComboBox;
+            comboBox.ItemsSource = data;
+            comboBox.SelectedIndex = 0;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            string value = comboBox.SelectedItem as string;
+            this.Title = "Railway Station: " + value;
+            GraphControl gc = (GraphControl)this.FindName("GraphControl");
+            gc.ChangePark(value);
+        }
     }
 }

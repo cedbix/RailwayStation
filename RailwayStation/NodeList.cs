@@ -25,6 +25,5 @@ namespace RailwayStation
                     return node;
             return null;
         }       
-
     }
 }

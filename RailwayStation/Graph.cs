@@ -83,5 +83,12 @@ namespace RailwayStation
                 return nodeSet.Count;
             }
         }
+
+        public void Sort()
+        {
+            nodeSet.OrderBy(node => node.Value);
+        }
+
+
     }
 }

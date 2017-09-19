@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RailwayStation
 {
-    class MyPoint
+    class MyPoint : IComparable<MyPoint>
     {
         private int x = 0;
         private int y = 0;
@@ -67,6 +67,18 @@ namespace RailwayStation
         public override int GetHashCode()
         {
             return x ^ y;
+        }
+
+        public int CompareTo(MyPoint other)
+        {
+            if (X > other.X)
+                return 1;
+            else if (X < other.X)
+                return -1;
+            else if (X == other.X)
+                return 0;
+            else 
+                throw new NotImplementedException();
         }
     }
 }

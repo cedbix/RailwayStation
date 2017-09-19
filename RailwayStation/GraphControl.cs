@@ -2,12 +2,29 @@
 using System.Windows.Input;
 using System.Windows.Media;
 using System;
+using System.Windows.Controls;
 
 namespace RailwayStation
 {
     class GraphControl : FrameworkElement
     {
+
         private Graph<MyPoint> graph;
+        private Graph<MyPoint> activePark;
+        private Graph<MyPoint> park1;
+        private Graph<MyPoint> park2;
+        private Graph<MyPoint> park3;
+
+        public void ChangePark(string park)
+        {
+            if (park.Equals("Park 1"))
+                activePark = park1;
+            else if (park.Equals("Park 2"))
+                activePark = park2;
+            else if (park.Equals("Park 3"))
+                activePark = park3;
+            this.InvalidateVisual();
+        }
 
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
@@ -21,6 +38,30 @@ namespace RailwayStation
         protected override void OnRender(DrawingContext drawingContext)
         {
             initGraph();
+
+            // Draw park
+            PathFigure path = new PathFigure();
+            bool pathStarted = false;
+            foreach (GraphNode<MyPoint> node in activePark.Nodes)
+            {
+                if (!pathStarted)
+                {
+                    path.StartPoint = new Point(node.Value.X, node.Value.Y);
+                    path.IsClosed = true;
+                    pathStarted = true;
+                }
+                else
+                {
+                    LineSegment segment = new LineSegment();
+                    segment.Point = new Point(node.Value.X, node.Value.Y);
+                    path.Segments.Add(segment);
+                }
+            }
+            PathGeometry geometry = new PathGeometry();
+            geometry.Figures.Add(path);
+            drawingContext.DrawGeometry(Brushes.LightGreen, new Pen(Brushes.Transparent, 1), geometry);
+
+            // Draw graph
             foreach (GraphNode<MyPoint> node in graph.Nodes)
             {
                 foreach (GraphNode<MyPoint> neighbor in node.Neighbors)
@@ -29,12 +70,20 @@ namespace RailwayStation
                 if (node.Neighbors.Count > 2)
                     drawingContext.DrawEllipse(Brushes.Red, new Pen(Brushes.DarkSlateGray, 1), new Point(node.Value.X, node.Value.Y), 2, 2);
             }
-
         }
 
         protected void initGraph()
         {
+   
+
             graph = new Graph<MyPoint>();
+            park1 = new Graph<MyPoint>();
+            park2 = new Graph<MyPoint>();
+            park3 = new Graph<MyPoint>();
+
+            if (activePark == null)
+                activePark = park1;
+
 
             // Path 1
             GraphNode<MyPoint> n0_50 = new GraphNode<MyPoint>(new MyPoint(0, 50));
@@ -64,6 +113,9 @@ namespace RailwayStation
             GraphNode<MyPoint> n490_80 = new GraphNode<MyPoint>(new MyPoint(490, 80));
             GraphNode<MyPoint> n500_80 = new GraphNode<MyPoint>(new MyPoint(500, 80));
             GraphNode<MyPoint> n90_10 = new GraphNode<MyPoint>(new MyPoint(90, 10));
+
+            
+            
             graph.AddNode(n0_50);
             graph.AddNode(n20_30);
             graph.AddNode(n40_30);
@@ -143,6 +195,38 @@ namespace RailwayStation
             graph.AddNode(n140_140);
             graph.AddDirectedEdge(n0_110, n110_110, 1);
             graph.AddDirectedEdge(n110_110, n140_140, 1);
+
+            // Park 1
+            park1.AddNode(n40_30);
+            park1.AddNode(n70_60);
+            park1.AddNode(n460_60);
+            park1.AddNode(n440_40);
+            park1.AddNode(n420_40);
+            park1.AddNode(n410_30);
+
+            // Park 2
+            park2.AddNode(n70_60);
+            park2.AddNode(n470_60);
+            park2.AddNode(n490_80);
+            park2.AddNode(n440_80);
+            park2.AddNode(n420_100);
+            park2.AddNode(n260_100);
+            park2.AddNode(n250_90);
+            park2.AddNode(n100_90);
+
+            // Park 3
+            park3.AddNode(n40_30);
+            park3.AddNode(n100_90);
+            park3.AddNode(n250_90);
+            park3.AddNode(n260_100);
+            park3.AddNode(n420_100);
+            park3.AddNode(n440_80);
+            park3.AddNode(n490_80);
+            park3.AddNode(n470_60);
+            park3.AddNode(n460_60);
+            park3.AddNode(n440_40);
+            park3.AddNode(n420_40);
+            park3.AddNode(n410_30);
         }
 
     }

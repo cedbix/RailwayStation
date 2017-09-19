@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="Railway Station" Height="180" Width="525">
     <Grid>
-        <local:GraphControl />
+
+        <ComboBox
+            HorizontalAlignment="Left"
+            Margin="10,10,0,0"
+            VerticalAlignment="Top"
+            Width="120"
+            Loaded="ComboBox_Loaded"
+            SelectionChanged="ComboBox_SelectionChanged"/>
+
+        <local:GraphControl x:Name="GraphControl"/>
     </Grid>
 </Window>
