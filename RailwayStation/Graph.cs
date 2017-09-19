@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RailwayStation
 {
-    class Graph<T>// : IEnumerable<T>
+    class Graph<T>
     {
         private NodeList<T> nodeSet;
         private string name;
@@ -28,23 +28,20 @@ namespace RailwayStation
                 this.nodeSet = nodeSet;
         }
 
-        public void AddNode(GraphNode<T> node)
+        public void AddNode(Node<T> node)
         {
             nodeSet.Add(node);
         }
 
         public void AddNode(T value)
         {
-            nodeSet.Add(new GraphNode<T>(value));
+            nodeSet.Add(new Node<T>(value));
         }
 
-        public void AddDirectedEdge(GraphNode<T> from, GraphNode<T> to, int cost)
+        public void AddDirectedEdge(Node<T> from, Node<T> to, int cost)
         {
             from.Neighbors.Add(to);
-            from.Costs.Add(cost);
-
             to.Neighbors.Add(from);
-            to.Costs.Add(cost);
         }
 
         public bool Contains(T value)
@@ -54,23 +51,17 @@ namespace RailwayStation
 
         public bool Remove(T value)
         {
-            // Remove the node from nodeset
-            GraphNode<T> nodeToRemove = (GraphNode<T>)nodeSet.FindByValue(value);
+            Node<T> nodeToRemove = (Node<T>)nodeSet.FindByValue(value);
             if (nodeToRemove == null)
-                // node wasn't found
                 return false;
 
             nodeSet.Remove(nodeToRemove);
-            // enumerate through each node in the nodeSet, removing edges to this node
-            foreach (GraphNode<T> gnode in nodeSet)
+
+            foreach (Node<T> gnode in nodeSet)
             {
                 int index = gnode.Neighbors.IndexOf(nodeToRemove);
                 if (index != -1)
-                {
-                    // remove the reference to the node and associated cost
                     gnode.Neighbors.RemoveAt(index);
-                    gnode.Costs.RemoveAt(index);
-                }
             }
 
             return true;
@@ -90,11 +81,6 @@ namespace RailwayStation
             {
                 return nodeSet.Count;
             }
-        }
-
-        public void Sort()
-        {
-            nodeSet.OrderBy(node => node.Value);
         }
 
         public string Name

@@ -31,10 +31,12 @@ namespace RailwayStation
             }
         }
 
-        protected NodeList<T> Neighbors
+        public NodeList<T> Neighbors
         {
             get
             {
+                if (neighbors == null)
+                    neighbors = new NodeList<T>();
                 return neighbors;
             }
             set
